@@ -25,40 +25,19 @@
 
 <div class="row mb-5">
 
-    <div class="col-md-2">
+    {% for category in categories %}
+
+    <div class="col-md-3 mb-3">
+
         <div class="card text-center p-3">
-            📱
-            <h5>Mobiles</h5>
+
+            <h5>{{ category.name }}</h5>
+
         </div>
+
     </div>
 
-    <div class="col-md-2">
-        <div class="card text-center p-3">
-            💻
-            <h5>Laptops</h5>
-        </div>
-    </div>
-
-    <div class="col-md-2">
-        <div class="card text-center p-3">
-            🎧
-            <h5>Electronics</h5>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="card text-center p-3">
-            ⌚
-            <h5>Smart Watches</h5>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="card text-center p-3">
-            📺
-            <h5>Televisions</h5>
-        </div>
-    </div>
+    {% endfor %}
 
 </div>
 
