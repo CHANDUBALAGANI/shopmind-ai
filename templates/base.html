@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
@@ -54,21 +56,36 @@
 
             </ul>
 
-            <div class="d-flex">
+<form class="d-flex me-3" method="GET" action="/">
 
-                <a href="#" class="btn btn-outline-light me-2">
-                    ❤️ Wishlist
-                </a>
+    <input
+        class="form-control me-2"
+        type="search"
+        name="search"
+        placeholder="Search products..."
+        value="{{ request.GET.search }}">
 
-                <a href="#" class="btn btn-warning me-2">
-                    🛒 Cart
-                </a>
+    <button class="btn btn-success" type="submit">
+        Search
+    </button>
 
-                <a href="#" class="btn btn-primary">
-                    Login
-                </a>
+</form>
 
-            </div>
+<div class="d-flex">
+
+    <a href="#" class="btn btn-outline-light me-2">
+        ❤️ Wishlist
+    </a>
+
+    <a href="#" class="btn btn-warning me-2">
+        🛒 Cart
+    </a>
+
+    <a href="#" class="btn btn-primary">
+        Login
+    </a>
+
+</div>
 
         </div>
 
