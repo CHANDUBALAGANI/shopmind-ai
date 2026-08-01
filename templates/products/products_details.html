@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <div class="col-md-5">
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}"
+                     class="img-fluid rounded"
+                     alt="{{ product.name }}">
+            {% endif %}
+
+        </div>
+
+        <div class="col-md-7">
+
+            <h2>{{ product.name }}</h2>
+
+            <h4 class="text-success">
+                ₹{{ product.price }}
+            </h4>
+
+            <p>
+                <strong>Category:</strong>
+                {{ product.category.name }}
+            </p>
+
+            <p>
+                {{ product.description }}
+            </p>
+
+            <p>
+                <strong>Stock:</strong>
+                {{ product.stock }}
+            </p>
+
+            <button class="btn btn-primary">
+                Add to Cart
+            </button>
+
+            <button class="btn btn-outline-danger">
+                Add to Wishlist
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
