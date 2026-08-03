@@ -59,3 +59,33 @@ def add_to_cart(request, product_id):
         cart_item.save()
 
     return redirect('product_list')
+
+
+
+def cart_view(request):
+
+    # If there is no session yet, show an empty cart
+    if not request.session.session_key:
+        return render(request, 'products/cart.html', {
+            'cart_items': [],
+            'total': 0,
+        })
+
+    session_key = request.session.session_key
+
+    try:
+        cart = Cart.objects.get(session_key=session_key)
+        cart_items = CartItem.objects.filter(cart=cart)
+
+    except Cart.DoesNotExist:
+        cart_items = []
+
+    total = 0
+
+    for item in cart_items:
+        total += item.product.price * item.quantity
+
+    return render(request, 'products/cart.html', {
+        'cart_items': cart_items,
+        'total': total,
+    })

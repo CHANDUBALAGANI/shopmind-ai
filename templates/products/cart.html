@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="fw-bold mb-4">
+        🛒 Shopping Cart
+    </h2>
+
+    {% if cart_items %}
+
+    <div class="row">
+
+        <!-- Cart Items -->
+        <div class="col-lg-8">
+
+            {% for item in cart_items %}
+
+            <div class="card product-card shadow-sm border-0 mb-4">
+
+                <div class="row g-0">
+
+                    <div class="col-md-4">
+
+                        {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}"
+                             class="img-fluid rounded-start"
+                             alt="{{ item.product.name }}"
+                             style="height:220px; width:100%; object-fit:cover;">
+                        {% endif %}
+
+                    </div>
+
+                    <div class="col-md-8">
+
+                        <div class="card-body h-100 d-flex flex-column">
+
+                            <small class="text-muted">
+                                {{ item.product.category.name }}
+                            </small>
+
+                            <h4 class="fw-bold">
+                                {{ item.product.name }}
+                            </h4>
+
+                            <div class="text-warning mb-2">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+
+                            <h5 class="text-success fw-bold">
+                                ₹{{ item.product.price }}
+                            </h5>
+
+                            <p class="mb-2">
+                                <strong>Quantity:</strong>
+                                {{ item.quantity }}
+                            </p>
+
+                            <p class="mb-3">
+                                <strong>Subtotal:</strong>
+
+                                <span class="text-success fw-bold">
+                                    ₹{{ item.subtotal }}
+                                </span>
+
+                            </p>
+
+                            <div class="mt-auto d-flex gap-2">
+
+                                <!-- We'll activate these in the next step -->
+                                <button class="btn btn-outline-secondary rounded-pill" disabled>
+                                    ➖
+                                </button>
+
+                                <button class="btn btn-outline-secondary rounded-pill" disabled>
+                                    ➕
+                                </button>
+
+                                <button class="btn btn-outline-danger rounded-pill ms-auto" disabled>
+                                    🗑 Remove
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold mb-4">
+                        Order Summary
+                    </h4>
+
+                    <div class="d-flex justify-content-between">
+
+                        <span>Total Items</span>
+
+                        <strong>{{ cart_items|length }}</strong>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+
+                        <h5>Grand Total</h5>
+
+                        <h5 class="text-success">
+                            ₹{{ total }}
+                        </h5>
+
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+
+                        <a href="{% url 'product_list' %}"
+                           class="btn btn-outline-dark">
+
+                            Continue Shopping
+
+                        </a>
+
+                        <button class="btn btn-success" disabled>
+
+                            Proceed to Checkout
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="card shadow-sm border-0 text-center p-5">
+
+        <h3>Your cart is empty.</h3>
+
+        <p class="text-muted">
+            Start adding products to your shopping cart.
+        </p>
+
+        <a href="{% url 'product_list' %}"
+           class="btn btn-primary rounded-pill mt-3">
+
+            Continue Shopping
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
