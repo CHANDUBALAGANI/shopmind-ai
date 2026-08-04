@@ -55,9 +55,11 @@ def add_to_cart(request, product_id):
 
     # If it already existed, increase quantity
     if not created:
-        cart_item.quantity += 1
-        cart_item.save()
 
+     if cart_item.quantity < product.stock:
+
+          cart_item.quantity += 1
+          cart_item.save()
     return redirect('product_list')
 
 
@@ -89,3 +91,52 @@ def cart_view(request):
         'cart_items': cart_items,
         'total': total,
     })
+
+
+
+def increase_quantity(request, item_id):
+
+    cart_item = get_object_or_404(
+        CartItem,
+        id=item_id
+    )
+
+    # Increase only if stock is available
+    if cart_item.quantity < cart_item.product.stock:
+
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return redirect('cart')
+
+
+def decrease_quantity(request, item_id):
+
+    cart_item = get_object_or_404(
+        CartItem,
+        id=item_id
+    )
+
+    if cart_item.quantity > 1:
+
+        cart_item.quantity -= 1
+        cart_item.save()
+
+    else:
+
+        cart_item.delete()
+
+    return redirect('cart')
+
+
+
+def remove_from_cart(request, item_id):
+
+    cart_item = get_object_or_404(
+        CartItem,
+        id=item_id
+    )
+
+    cart_item.delete()
+
+    return redirect('cart')

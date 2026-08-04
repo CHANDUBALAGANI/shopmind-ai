@@ -69,17 +69,26 @@
                             <div class="mt-auto d-flex gap-2">
 
                                 <!-- We'll activate these in the next step -->
-                                <button class="btn btn-outline-secondary rounded-pill" disabled>
-                                    ➖
-                                </button>
+                              <a href="{% url 'decrease_quantity' item.id %}"
+                              class="btn btn-outline-secondary rounded-pill">
 
-                                <button class="btn btn-outline-secondary rounded-pill" disabled>
-                                    ➕
-                                </button>
+                              ➖
 
-                                <button class="btn btn-outline-danger rounded-pill ms-auto" disabled>
-                                    🗑 Remove
-                                </button>
+                              </a>
+
+                              <a href="{% url 'increase_quantity' item.id %}"
+                              class="btn btn-outline-secondary rounded-pill">
+
+                              ➕
+
+                              </a>
+
+                            <a href="{% url 'remove_from_cart' item.id %}"
+                            class="btn btn-outline-danger rounded-pill ms-auto">
+
+                                🗑 Remove
+
+                            </a>
 
                             </div>
 
