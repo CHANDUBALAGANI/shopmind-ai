@@ -1,5 +1,6 @@
 from django.db import models
-
+from PIL import Image
+import os
 class Category(models.Model):
     name = models.CharField(max_length=100)
     icon = models.CharField(max_length=10, blank=True)
@@ -20,6 +21,27 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.image:
+            image_path = self.image.path
+
+            img = Image.open(image_path)
+
+            # Convert RGBA images to RGB so they can be saved as JPEG
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Resize if image is too large
+            max_size = (800, 800)
+            img.thumbnail(max_size)
+
+            # Save with compression
+            img.save(image_path, optimize=True, quality=75)
+
+
+            
 class Cart(models.Model):
     session_key = models.CharField(
     max_length=100,
