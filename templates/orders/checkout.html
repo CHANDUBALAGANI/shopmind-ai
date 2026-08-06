@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <div class="col-md-8">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h3 class="mb-4">
+                        Shipping Details
+                    </h3>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <button
+                            class="btn btn-success btn-lg">
+
+                            Place Order
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h4 class="mb-3">
+    Order Summary
+</h4>
+
+<hr>
+
+{% if cart_items %}
+
+    {% for item in cart_items %}
+
+        <div class="d-flex justify-content-between mb-3">
+
+            <div>
+
+                <strong>
+
+                    {{ item.product.name }}
+
+                </strong>
+
+                <br>
+
+                <small class="text-muted">
+
+                    Qty : {{ item.quantity }}
+
+                </small>
+
+            </div>
+
+            <div>
+
+                ₹{{ item.product.price }}
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+    <hr>
+
+    <h5 class="d-flex justify-content-between">
+
+        <span>Total</span>
+
+        <span class="text-success">
+
+            ₹{{ total }}
+
+        </span>
+
+    </h5>
+
+{% else %}
+
+    <p class="text-muted">
+
+        Your cart is empty.
+
+    </p>
+
+{% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

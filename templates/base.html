@@ -81,9 +81,31 @@
     🛒 Cart
 </a>
 
-    <a href="#" class="btn btn-primary">
-        Login
+{% if request.user.is_authenticated %}
+
+    <span class="navbar-text me-2">
+
+        👋 Welcome, {{ request.user.username }}
+
+    </span>
+
+    <a href="{% url 'logout' %}"
+       class="btn btn-danger">
+
+        Logout
+
     </a>
+
+{% else %}
+
+    <a href="{% url 'login' %}"
+       class="btn btn-primary">
+
+        Login
+
+    </a>
+
+{% endif %}
 
 </div>
 

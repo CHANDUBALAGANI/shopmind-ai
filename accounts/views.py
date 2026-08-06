@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import login
-
+from django.contrib.auth import authenticate, login, logout
 from .forms import RegisterForm
 
 
@@ -70,5 +69,12 @@ def user_login(request):
 
 
 def user_logout(request):
+
+    logout(request)
+
+    messages.success(
+        request,
+        "You have been logged out successfully."
+    )
 
     return redirect("product_list")
