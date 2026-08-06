@@ -4,11 +4,85 @@
 
 <div class="container mt-5">
 
-    <h2>My Orders</h2>
+    <h2 class="mb-4">
+        📦 My Orders
+    </h2>
 
-    <hr>
+    {% if orders %}
 
-    <p>Your orders will appear here.</p>
+        {% for order in orders %}
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <strong>Order ID</strong><br>
+                        #{{ order.id }}
+                    </div>
+
+                    <div class="col-md-3">
+                        <strong>Date</strong><br>
+                        {{ order.created_at|date:"d M Y" }}
+                    </div>
+
+                    <div class="col-md-2">
+                        <strong>Status</strong><br>
+
+                        {% if order.status == "Pending" %}
+                            <span class="badge bg-warning text-dark">
+                                {{ order.status }}
+                            </span>
+
+                        {% elif order.status == "Delivered" %}
+                            <span class="badge bg-success">
+                                {{ order.status }}
+                            </span>
+
+                        {% else %}
+                            <span class="badge bg-info">
+                                {{ order.status }}
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <strong>Total</strong><br>
+                        ₹{{ order.total_amount }}
+                    </div>
+
+                    <div class="col-md-2">
+
+                    <a href="{% url 'order_detail' order.id %}"
+                    class="btn btn-primary btn-sm mt-3">
+
+                    View Details
+
+                    </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="alert alert-info">
+
+            You haven't placed any orders yet.
+
+        </div>
+
+    {% endif %}
 
 </div>
 

@@ -83,6 +83,13 @@
 
 {% if request.user.is_authenticated %}
 
+<a href="{% url 'my_orders' %}"
+   class="btn btn-outline-light me-2">
+
+    📦 My Orders
+
+</a>
+
     <span class="navbar-text me-2">
 
         👋 Welcome, {{ request.user.username }}

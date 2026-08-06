@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">
+        📦 Order #{{ order.id }}
+    </h2>
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <strong>Order Date</strong><br>
+
+                    {{ order.created_at|date:"d M Y H:i" }}
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <strong>Status</strong><br>
+
+                    <span class="badge bg-warning text-dark">
+
+                        {{ order.status }}
+
+                    </span>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <strong>Total</strong><br>
+
+                    <span class="text-success fw-bold">
+
+                        ₹{{ order.total_amount }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+
+            <h4 class="mb-0">
+                🛒 Ordered Products
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for item in items %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ item.product.name }}
+
+                        </td>
+
+                        <td>
+
+                            ₹{{ item.price }}
+
+                        </td>
+
+                        <td>
+
+                            {{ item.quantity }}
+
+                        </td>
+
+                        <td>
+
+                            ₹{% widthratio item.price 1 item.quantity %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h4 class="mb-0">
+                📍 Shipping Address
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <p><strong>{{ order.full_name }}</strong></p>
+
+            <p>{{ order.address }}</p>
+
+            <p>{{ order.city }}, {{ order.state }}</p>
+
+            <p>{{ order.pincode }}</p>
+
+            <p><strong>Phone:</strong> {{ order.phone }}</p>
+
+            <p><strong>Email:</strong> {{ order.email }}</p>
+
+        </div>
+
+    </div>
+
+    <div class="mt-4">
+
+        <a href="{% url 'my_orders' %}"
+           class="btn btn-secondary">
+
+            ← Back to My Orders
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

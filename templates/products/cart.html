@@ -125,16 +125,23 @@
 
                     <hr>
 
-                    <div class="d-flex justify-content-between">
+                    <div class="text-end mt-4">
 
-                        <h5>Grand Total</h5>
+                        <h3 class="mb-3">
+                            Grand Total :
+                            <span class="text-success">
+                                ₹{{ total }}
+                            </span>
+                        </h3>
 
-                        <h5 class="text-success">
-                            ₹{{ total }}
-                        </h5>
+                        <a href="{% url 'checkout' %}"
+                        class="btn btn-success btn-lg">
+
+                            Proceed to Checkout
+
+                        </a>
 
                     </div>
-
                     <div class="d-grid gap-2 mt-4">
 
                         <a href="{% url 'product_list' %}"
@@ -144,11 +151,6 @@
 
                         </a>
 
-                        <button class="btn btn-success" disabled>
-
-                            Proceed to Checkout
-
-                        </button>
 
                     </div>
 
