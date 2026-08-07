@@ -5,7 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI E-Commerce</title>
+    <title>ShopMind AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,12 +23,22 @@
 <body>
 
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg sticky-top">
+
     <div class="container">
 
-        <a class="navbar-brand fw-bold" href="/">
-            🛍️ ShopMind AI
-        </a>
+<a class="navbar-brand d-flex align-items-center"
+   href="/">
+
+    <span style="font-size:28px;">🤖</span>
+
+    <span class="ms-2">
+
+        ShopMind AI
+
+    </span>
+
+</a>
 
         <button class="navbar-toggler"
                 type="button"
@@ -34,93 +52,115 @@
         <div class="collapse navbar-collapse"
              id="navbarNav">
 
+            <!-- Left Side -->
             <ul class="navbar-nav me-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
+
+                    <a class="nav-link"
+                       href="/">
+
                         Home
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Products
                     </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Categories
-                    </a>
                 </li>
 
             </ul>
 
-<form class="d-flex me-3" method="GET" action="/">
+            <!-- Search -->
+            <form class="d-flex me-3"
+                  method="GET"
+                  action="/">
 
-    <input
-        class="form-control me-2"
-        type="search"
-        name="search"
-        placeholder="Search products..."
-        value="{{ request.GET.search }}">
+                <input class="form-control me-2"
+                       type="search"
+                       name="search"
+                       placeholder="Search products..."
+                       value="{{ request.GET.search }}">
 
-    <button class="btn btn-success" type="submit">
-        Search
-    </button>
+                <button class="btn btn-dark"
+                        type="submit">
 
-</form>
+                    Search
 
-<div class="d-flex">
+                </button>
 
-    <a href="#" class="btn btn-outline-light me-2">
-        ❤️ Wishlist
-    </a>
+            </form>
 
-<a href="{% url 'cart' %}" class="btn btn-warning me-2">
-    🛒 Cart
-</a>
+            <!-- Right Side -->
+            <div class="d-flex align-items-center">
 
-{% if request.user.is_authenticated %}
+                <a href="{% url 'cart' %}"
+                   class="btn btn-dark me-3">
 
-<a href="{% url 'my_orders' %}"
-   class="btn btn-outline-light me-2">
+                    🛒 Cart
 
-    📦 My Orders
+                </a>
 
-</a>
+                {% if request.user.is_authenticated %}
 
-    <span class="navbar-text me-2">
+                <div class="dropdown">
 
-        👋 Welcome, {{ request.user.username }}
+                    <button class="btn btn-outline-dark dropdown-toggle"
+                            data-bs-toggle="dropdown">
 
-    </span>
+                        👤 {{ request.user.username }}
 
-    <a href="{% url 'logout' %}"
-       class="btn btn-danger">
+                    </button>
 
-        Logout
+                    <ul class="dropdown-menu dropdown-menu-end">
 
-    </a>
+                        <li>
 
-{% else %}
+                            <a class="dropdown-item"
+                               href="{% url 'my_orders' %}">
 
-    <a href="{% url 'login' %}"
-       class="btn btn-primary">
+                                📦 My Orders
 
-        Login
+                            </a>
 
-    </a>
+                        </li>
 
-{% endif %}
+                        <li>
 
-</div>
+                            <hr class="dropdown-divider">
+
+                        </li>
+
+                        <li>
+
+                            <a class="dropdown-item text-danger"
+                               href="{% url 'logout' %}">
+
+                                🚪 Logout
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="btn btn-dark">
+
+                    Login
+
+                </a>
+
+                {% endif %}
+
+            </div>
 
         </div>
 
     </div>
-</nav>
 
+</nav>
     <!-- Main Content -->
     <div class="container mt-4">
         {% if messages %}
@@ -143,11 +183,101 @@
 
 {% endif %}
 
-        {% block content %}
 
-        {% endblock %}
+    {% block content %}
+
+    {% endblock %}
+
+</div>
+
+<!-- Footer Starts Here -->
+
+<footer class="footer mt-5">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-5">
+
+                <h4 class="fw-bold">
+                    🤖 ShopMind AI
+                </h4>
+
+<p class="text-muted mt-3">
+
+    ShopMind AI is a modern AI-powered e-commerce
+    platform built with Django. Discover premium
+    products with intelligent search, secure checkout,
+    and a seamless shopping experience.
+
+</p>
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <h5>Quick Links</h5>
+
+                <ul class="list-unstyled mt-3">
+
+                    <li><a href="/">Home</a></li>
+
+                    <li><a href="{% url 'cart' %}">Cart</a></li>
+
+                    {% if request.user.is_authenticated %}
+
+                    <li>
+
+                        <a href="{% url 'my_orders' %}">
+
+                            My Orders
+
+                        </a>
+
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <h5>Technologies</h5>
+
+                <ul class="list-unstyled mt-3">
+
+                    <li>Python</li>
+
+                    <li>Django</li>
+
+                    <li>Bootstrap 5</li>
+
+                    <li>SQLite</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="text-center text-muted">
+
+            © 2026 ShopMind AI
+
+        </div>
 
     </div>
+
+</footer>
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
