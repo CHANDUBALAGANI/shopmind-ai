@@ -559,16 +559,19 @@ body{
 
 .product-buttons .btn{
 
-    width:100%;
-
-    margin-top:12px;
-
     border-radius:12px;
 
     padding:12px;
 
+    font-weight:600;
+
 }
 
+.product-buttons .d-flex{
+
+    gap:12px;
+
+}
 /* Premium Badge */
 
 .badge.bg-primary{
