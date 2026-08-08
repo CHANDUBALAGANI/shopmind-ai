@@ -91,12 +91,27 @@
             <!-- Right Side -->
             <div class="d-flex align-items-center">
 
-                <a href="{% url 'cart' %}"
-                   class="btn btn-dark me-3">
+            <a href="{% url 'cart' %}"
+            class="btn btn-dark position-relative me-3">
 
-                    🛒 Cart
+                🛒 Cart
 
-                </a>
+                {% if cart_count %}
+
+                <span
+                    class="position-absolute
+                        top-0
+                        start-100
+                        translate-middle
+                        badge rounded-pill bg-danger">
+
+                    {{ cart_count }}
+
+                </span>
+
+                {% endif %}
+
+            </a>
 
                 {% if request.user.is_authenticated %}
 
