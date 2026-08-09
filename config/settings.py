@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts',
     "orders",
     "wishlist",
+    "ai_assistant",
 ]
 
 MIDDLEWARE = [

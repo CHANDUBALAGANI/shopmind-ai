@@ -30,3 +30,4 @@ staticfiles/
 # Operating system
 .DS_Store
 Thumbs.db
+db_backup_before_product_cleanup.sqlite3

@@ -13,6 +13,8 @@ urlpatterns = [
     path('orders/', include('orders.urls')),
 
     path("wishlist/", include("wishlist.urls")),
+
+    path("ai/", include("ai_assistant.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += static(
