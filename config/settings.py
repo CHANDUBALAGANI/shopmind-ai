@@ -35,9 +35,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = [
+    "shopmind-ai-ykfq.onrender.com",
     "localhost",
     "127.0.0.1",
-    os.getenv("https://shopmind-ai-ykfq.onrender.com", ""),
 ]
 
 
