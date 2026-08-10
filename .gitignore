@@ -31,3 +31,4 @@ staticfiles/
 .DS_Store
 Thumbs.db
 db_backup_before_product_cleanup.sqlite3
+products_backup.json
