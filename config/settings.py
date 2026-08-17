@@ -38,8 +38,10 @@ ALLOWED_HOSTS = [
     "shopmind-ai-ykfq.onrender.com",
     "localhost",
     "127.0.0.1",
-    ".vercel.app",
 ]
+
+if os.getenv("VERCEL"):
+    ALLOWED_HOSTS.append(".vercel.app")
 
 
 
