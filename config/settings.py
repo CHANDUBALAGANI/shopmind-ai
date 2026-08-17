@@ -38,8 +38,7 @@ ALLOWED_HOSTS = [
     "shopmind-ai-ykfq.onrender.com",
     "localhost",
     "127.0.0.1",
- 
-    "shopmind-6xgu3ek8l-chandu-6337.vercel.app",
+    ".vercel.app",
 ]
 
 
