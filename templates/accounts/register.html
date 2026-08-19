@@ -2,52 +2,518 @@
 
 {% block content %}
 
-<div class="row justify-content-center">
+<style>
 
-    <div class="col-md-6">
+    /* =========================
+       REGISTER PAGE
+    ========================= */
 
-        <div class="card shadow border-0 mt-4">
+    .auth-page {
+        min-height: 78vh;
 
-            <div class="card-body p-4">
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-                <h2 class="text-center mb-4">
-                    Create Account
-                </h2>
+        padding: 50px 15px;
+    }
 
-                <form method="POST">
 
-                    {% csrf_token %}
+    .auth-card {
+        width: 100%;
+        max-width: 500px;
 
-                    {{ form.as_p }}
+        background: #ffffff;
 
-                    <div class="d-grid">
+        border: 1px solid #e5e7eb;
+        border-radius: 20px;
 
-                        <button type="submit"
-                                class="btn btn-primary btn-lg">
+        padding: 38px;
 
-                            Register
+        box-shadow:
+            0 20px 50px
+            rgba(17, 24, 39, 0.10);
+    }
 
-                        </button>
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .auth-brand-icon {
+        width: 58px;
+        height: 58px;
+
+        margin: 0 auto 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #111827;
+
+        border-radius: 18px;
+
+        font-size: 30px;
+    }
+
+
+    .auth-title {
+        color: #111827;
+
+        font-size: 28px;
+        font-weight: 700;
+
+        text-align: center;
+
+        margin-bottom: 8px;
+    }
+
+
+    .auth-subtitle {
+        color: #6b7280;
+
+        font-size: 14px;
+
+        text-align: center;
+
+        margin-bottom: 30px;
+    }
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .auth-form-group {
+        margin-bottom: 18px;
+    }
+
+
+    .auth-form-group label {
+        display: block;
+
+        color: #374151;
+
+        font-size: 14px;
+        font-weight: 600;
+
+        margin-bottom: 8px;
+    }
+
+
+    .auth-form-group input {
+        width: 100%;
+
+        height: 48px;
+
+        padding: 0 14px;
+
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+
+        outline: none;
+
+        font-size: 14px;
+
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+
+    .auth-form-group input:focus {
+        border-color: #111827;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(17, 24, 39, 0.08);
+    }
+
+
+    /* =========================
+       HELP TEXT
+    ========================= */
+
+    .auth-help-text {
+        margin-top: 7px;
+
+        color: #9ca3af;
+
+        font-size: 12px;
+
+        line-height: 1.5;
+    }
+
+
+    .password-help {
+        margin-top: 8px;
+
+        padding: 12px 14px;
+
+        background: #f8fafc;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 10px;
+
+        color: #6b7280;
+
+        font-size: 12px;
+    }
+
+
+    .password-help ul {
+        margin: 0;
+
+        padding-left: 18px;
+    }
+
+
+    .password-help li {
+        margin-bottom: 4px;
+    }
+
+
+    /* =========================
+       ERRORS
+    ========================= */
+
+    .auth-error {
+        margin-top: 6px;
+
+        color: #dc2626;
+
+        font-size: 12px;
+    }
+
+
+    /* =========================
+       REGISTER BUTTON
+    ========================= */
+
+    .auth-submit-btn {
+        width: 100%;
+
+        height: 50px;
+
+        border: none;
+        border-radius: 11px;
+
+        background: #111827;
+
+        color: white;
+
+        font-size: 15px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        margin-top: 8px;
+
+        transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
+    }
+
+
+    .auth-submit-btn:hover {
+        transform: translateY(-1px);
+
+        opacity: 0.92;
+    }
+
+
+    /* =========================
+       LOGIN SECTION
+    ========================= */
+
+    .auth-divider {
+        border: none;
+
+        border-top: 1px solid #e5e7eb;
+
+        margin: 28px 0 22px;
+    }
+
+
+    .auth-login-text {
+        text-align: center;
+
+        color: #6b7280;
+
+        font-size: 14px;
+
+        margin: 0;
+    }
+
+
+    .auth-login-text a {
+        color: #111827;
+
+        font-weight: 600;
+
+        text-decoration: none;
+    }
+
+
+    .auth-login-text a:hover {
+        text-decoration: underline;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 576px) {
+
+        .auth-page {
+            padding: 25px 10px;
+        }
+
+
+        .auth-card {
+            padding: 28px 20px;
+
+            border-radius: 16px;
+        }
+
+
+        .auth-title {
+            font-size: 24px;
+        }
+
+    }
+
+</style>
+
+
+
+<!-- =========================
+     REGISTER PAGE
+========================= -->
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+
+        <!-- Header -->
+
+        <div class="auth-brand-icon">
+            🤖
+        </div>
+
+
+        <h2 class="auth-title">
+            Create your account
+        </h2>
+
+
+        <p class="auth-subtitle">
+            Join ShopMind AI and start your shopping journey.
+        </p>
+
+
+
+        <!-- Register Form -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- Non-field errors -->
+
+            {% if form.non_field_errors %}
+
+                <div class="auth-error">
+
+                    {{ form.non_field_errors }}
+
+                </div>
+
+            {% endif %}
+
+
+
+            <!-- Username -->
+
+            <div class="auth-form-group">
+
+                <label for="{{ form.username.id_for_label }}">
+
+                    Username
+
+                </label>
+
+
+                {{ form.username }}
+
+
+                {% if form.username.help_text %}
+
+                    <div class="auth-help-text">
+
+                        {{ form.username.help_text }}
 
                     </div>
 
-                </form>
+                {% endif %}
 
-                <hr>
 
-                <p class="text-center">
+                {% for error in form.username.errors %}
 
-                    Already have an account?
+                    <div class="auth-error">
 
-                    <a href="{% url 'login' %}">
-                        Login
-                    </a>
+                        {{ error }}
 
-                </p>
+                    </div>
+
+                {% endfor %}
 
             </div>
 
-        </div>
+
+
+            <!-- Email -->
+
+            <div class="auth-form-group">
+
+                <label for="{{ form.email.id_for_label }}">
+
+                    Email address
+
+                </label>
+
+
+                {{ form.email }}
+
+
+                {% for error in form.email.errors %}
+
+                    <div class="auth-error">
+
+                        {{ error }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+
+            <!-- Password -->
+
+            <div class="auth-form-group">
+
+                <label for="{{ form.password1.id_for_label }}">
+
+                    Password
+
+                </label>
+
+
+                {{ form.password1 }}
+
+
+                {% if form.password1.help_text %}
+
+                    <div class="password-help">
+
+                        {{ form.password1.help_text }}
+
+                    </div>
+
+                {% endif %}
+
+
+                {% for error in form.password1.errors %}
+
+                    <div class="auth-error">
+
+                        {{ error }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+
+            <!-- Confirm Password -->
+
+            <div class="auth-form-group">
+
+                <label for="{{ form.password2.id_for_label }}">
+
+                    Confirm password
+
+                </label>
+
+
+                {{ form.password2 }}
+
+
+                {% if form.password2.help_text %}
+
+                    <div class="auth-help-text">
+
+                        {{ form.password2.help_text }}
+
+                    </div>
+
+                {% endif %}
+
+
+                {% for error in form.password2.errors %}
+
+                    <div class="auth-error">
+
+                        {{ error }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+
+            <!-- Submit -->
+
+            <button type="submit"
+                    class="auth-submit-btn">
+
+                Create Account →
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- Login -->
+
+        <hr class="auth-divider">
+
+
+        <p class="auth-login-text">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+
+                Log in
+
+            </a>
+
+        </p>
+
 
     </div>
 

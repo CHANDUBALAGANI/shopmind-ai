@@ -1,5 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -11,6 +12,9 @@
 
     <title>ShopMind AI</title>
 
+
+    <!-- Google Font -->
+
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
 
@@ -18,14 +22,19 @@
           href="https://fonts.gstatic.com"
           crossorigin>
 
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
 
+
     <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
+
     <!-- Your CSS -->
+
     <link rel="stylesheet"
           href="{% static 'css/style.css' %}">
 
@@ -35,45 +44,68 @@
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      NAVIGATION BAR
-========================= -->
+     SHOW ONLY:
+     HOME
+     LOGIN
+     REGISTER
+===================================================== -->
 
-<nav class="navbar navbar-expand-lg sticky-top">
+{% if request.path == '/' or request.path == '/login/' or request.path == '/register/' %}
+
+<nav class="navbar navbar-expand-lg">
 
     <div class="container">
+
+
+        <!-- BRAND -->
 
         <a class="navbar-brand d-flex align-items-center"
            href="/">
 
             <span style="font-size: 28px;">
+
                 🤖
+
             </span>
 
+
             <span class="ms-2">
+
                 ShopMind AI
+
             </span>
 
         </a>
 
 
+        <!-- MOBILE MENU BUTTON -->
+
         <button class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon">
+
+            </span>
 
         </button>
+
 
 
         <div class="collapse navbar-collapse"
              id="navbarNav">
 
 
-            <!-- Left Navigation -->
+            <!-- LEFT NAVIGATION -->
 
             <ul class="navbar-nav me-auto">
+
 
                 <li class="nav-item">
 
@@ -86,10 +118,12 @@
 
                 </li>
 
+
             </ul>
 
 
-            <!-- Search -->
+
+            <!-- SEARCH -->
 
             <form class="d-flex me-3"
                   method="GET"
@@ -101,6 +135,7 @@
                        placeholder="Search products..."
                        value="{{ request.GET.search }}">
 
+
                 <button class="btn btn-dark"
                         type="submit">
 
@@ -111,17 +146,19 @@
             </form>
 
 
-            <!-- Right Side -->
+
+            <!-- RIGHT SIDE -->
 
             <div class="d-flex align-items-center">
 
 
-                <!-- Cart -->
+                <!-- CART -->
 
                 <a href="{% url 'cart' %}"
                    class="btn btn-dark position-relative me-3">
 
                     🛒 Cart
+
 
                     {% if cart_count %}
 
@@ -142,19 +179,23 @@
                 </a>
 
 
+
+                <!-- AUTHENTICATED USER -->
+
                 {% if request.user.is_authenticated %}
 
 
-                <!-- Logged In User -->
-
                 <div class="dropdown">
 
+
                     <button class="btn btn-outline-dark dropdown-toggle"
+                            type="button"
                             data-bs-toggle="dropdown">
 
                         👤 {{ request.user.username }}
 
                     </button>
+
 
 
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -172,6 +213,7 @@
                         </li>
 
 
+
                         <li>
 
                             <a class="dropdown-item"
@@ -184,11 +226,13 @@
                         </li>
 
 
+
                         <li>
 
                             <hr class="dropdown-divider">
 
                         </li>
+
 
 
                         <li>
@@ -202,15 +246,18 @@
 
                         </li>
 
+
                     </ul>
 
+
                 </div>
+
 
 
                 {% else %}
 
 
-                <!-- Login -->
+                <!-- LOGIN -->
 
                 <a href="{% url 'login' %}"
                    class="btn btn-dark">
@@ -222,22 +269,29 @@
 
                 {% endif %}
 
+
             </div>
 
+
         </div>
+
 
     </div>
 
 </nav>
 
+{% endif %}
 
 
-<!-- =========================
+
+<!-- =====================================================
      MAIN CONTENT
-========================= -->
+===================================================== -->
 
 <div class="container mt-4">
 
+
+    <!-- DJANGO MESSAGES -->
 
     {% if messages %}
 
@@ -249,13 +303,17 @@
                         show"
                  role="alert">
 
+
                 {{ message }}
+
 
                 <button type="button"
                         class="btn-close"
-                        data-bs-dismiss="alert">
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
 
                 </button>
+
 
             </div>
 
@@ -263,6 +321,9 @@
 
     {% endif %}
 
+
+
+    <!-- PAGE CONTENT -->
 
     {% block content %}
 
@@ -273,20 +334,26 @@
 
 
 
-<!-- =========================
+<!-- =====================================================
      FOOTER
-========================= -->
+     HOME PAGE ONLY
+===================================================== -->
+
+{% if request.path == '/' %}
 
 <footer class="footer mt-5">
 
+
     <div class="container">
+
 
         <div class="row">
 
 
-            <!-- About -->
+            <!-- ABOUT -->
 
             <div class="col-lg-5">
+
 
                 <h4 class="fw-bold">
 
@@ -304,12 +371,15 @@
 
                 </p>
 
+
             </div>
 
 
-            <!-- Quick Links -->
+
+            <!-- QUICK LINKS -->
 
             <div class="col-lg-3">
+
 
                 <h5>
 
@@ -320,10 +390,13 @@
 
                 <ul class="list-unstyled mt-3">
 
+
                     <li>
 
                         <a href="/">
+
                             Home
+
                         </a>
 
                     </li>
@@ -332,7 +405,9 @@
                     <li>
 
                         <a href="{% url 'cart' %}">
+
                             Cart
+
                         </a>
 
                     </li>
@@ -352,14 +427,18 @@
 
                     {% endif %}
 
+
                 </ul>
+
 
             </div>
 
 
-            <!-- Technologies -->
+
+            <!-- TECHNOLOGIES -->
 
             <div class="col-lg-4">
+
 
                 <h5>
 
@@ -380,54 +459,71 @@
 
                 </ul>
 
+
             </div>
 
+
         </div>
+
 
 
         <hr>
 
 
-        <div class="text-center text-muted">
+
+        <div class="text-center text-muted pb-3">
 
             © 2026 ShopMind AI
 
         </div>
 
+
     </div>
 
 </footer>
 
+{% endif %}
 
 
-<!-- =========================
+
+<!-- =====================================================
      SHOPMIND AI ASSISTANT
-========================= -->
+     HOME PAGE ONLY
+===================================================== -->
+
+{% if request.path == '/' %}
 
 
-<!-- Floating Button -->
+<!-- FLOATING BUTTON -->
 
 <button id="shopmind-ai-button"
         type="button"
         onclick="toggleShopMindAI()"
         aria-label="Open ShopMind AI">
 
+
     <span class="ai-button-icon">
+
         🤖
+
     </span>
 
-    <span class="ai-online-dot"></span>
+
+    <span class="ai-online-dot">
+
+    </span>
+
 
 </button>
 
 
 
-<!-- Chat Window -->
+<!-- CHAT WINDOW -->
 
 <div id="shopmind-ai-chat">
 
 
-    <!-- Header -->
+    <!-- HEADER -->
 
     <div class="shopmind-ai-header">
 
@@ -435,7 +531,7 @@
         <div class="shopmind-ai-profile">
 
 
-            <!-- AI Icon -->
+            <!-- AI ICON -->
 
             <div class="shopmind-ai-avatar">
 
@@ -444,9 +540,11 @@
             </div>
 
 
-            <!-- AI Title -->
+
+            <!-- AI TITLE -->
 
             <div class="shopmind-ai-title">
+
 
                 <strong>
 
@@ -463,12 +561,15 @@
 
                 </span>
 
+
             </div>
+
 
         </div>
 
 
-        <!-- Close Button -->
+
+        <!-- CLOSE BUTTON -->
 
         <button class="shopmind-ai-close"
                 type="button"
@@ -479,18 +580,20 @@
 
         </button>
 
+
     </div>
 
 
 
-    <!-- Messages -->
+    <!-- MESSAGES -->
 
     <div id="shopmind-ai-messages">
 
 
-        <!-- Welcome -->
+        <!-- WELCOME -->
 
         <div class="shopmind-ai-welcome">
+
 
             <div class="welcome-icon">
 
@@ -513,11 +616,12 @@
 
             </p>
 
+
         </div>
 
 
 
-        <!-- Quick Suggestions -->
+        <!-- QUICK SUGGESTIONS -->
 
         <div id="shopmind-ai-suggestions">
 
@@ -563,7 +667,7 @@
 
 
 
-    <!-- Input Area -->
+    <!-- INPUT AREA -->
 
     <div class="shopmind-ai-input-area">
 
@@ -589,19 +693,24 @@
 
 </div>
 
+{% endif %}
 
 
-<!-- =========================
+
+<!-- =====================================================
      BOOTSTRAP JAVASCRIPT
-========================= -->
+===================================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
-<!-- =========================
-     SHOPMIND AI JAVASCRIPT
-========================= -->
+<!-- =====================================================
+     AI JAVASCRIPT
+     HOME PAGE ONLY
+===================================================== -->
+
+{% if request.path == '/' %}
 
 <script>
 
@@ -662,6 +771,7 @@ function useShopMindSuggestion(message) {
 
 async function sendShopMindMessage() {
 
+
     const input =
         document.getElementById("shopmind-ai-input");
 
@@ -682,6 +792,7 @@ async function sendShopMindMessage() {
         input.value.trim();
 
 
+
     if (!message) {
 
         return;
@@ -690,7 +801,7 @@ async function sendShopMindMessage() {
 
 
 
-    /* Hide suggestions */
+    /* HIDE SUGGESTIONS */
 
     if (suggestions) {
 
@@ -700,7 +811,7 @@ async function sendShopMindMessage() {
 
 
 
-    /* User Message */
+    /* USER MESSAGE */
 
     const userMessage =
         document.createElement("div");
@@ -725,13 +836,13 @@ async function sendShopMindMessage() {
 
 
 
-    /* Disable Send Button */
+    /* DISABLE SEND BUTTON */
 
     sendButton.disabled = true;
 
 
 
-    /* Typing Animation */
+    /* TYPING ANIMATION */
 
     const loadingMessage =
         document.createElement("div");
@@ -879,8 +990,8 @@ async function sendShopMindMessage() {
 
 function getCookie(name) {
 
-    let cookieValue =
-        null;
+
+    let cookieValue = null;
 
 
     if (
@@ -936,9 +1047,13 @@ function getCookie(name) {
    ENTER KEY
 ========================= */
 
-document
-    .getElementById("shopmind-ai-input")
-    .addEventListener(
+const aiInput =
+    document.getElementById("shopmind-ai-input");
+
+
+if (aiInput) {
+
+    aiInput.addEventListener(
 
         "keydown",
 
@@ -960,21 +1075,21 @@ document
 
     );
 
+}
+
 
 </script>
 
 
 
-<!-- =========================
+<!-- =====================================================
      SHOPMIND AI CSS
-========================= -->
+===================================================== -->
 
 <style>
 
 
-/* =========================
-   FLOATING AI BUTTON
-========================= */
+/* FLOATING AI BUTTON */
 
 #shopmind-ai-button {
 
@@ -997,7 +1112,6 @@ document
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     cursor: pointer;
@@ -1020,10 +1134,6 @@ document
     transform:
         translateY(-3px)
         scale(1.03);
-
-    box-shadow:
-        0 14px 35px
-        rgba(17, 24, 39, 0.35);
 
 }
 
@@ -1057,9 +1167,7 @@ document
 
 
 
-/* =========================
-   CHAT WINDOW
-========================= */
+/* CHAT WINDOW */
 
 #shopmind-ai-chat {
 
@@ -1094,9 +1202,7 @@ document
 
 
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .shopmind-ai-header {
 
@@ -1139,7 +1245,6 @@ document
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     font-size: 26px;
@@ -1207,18 +1312,8 @@ document
 }
 
 
-.shopmind-ai-close:hover {
 
-    background:
-        rgba(255, 255, 255, 0.10);
-
-}
-
-
-
-/* =========================
-   MESSAGE AREA
-========================= */
+/* MESSAGE AREA */
 
 #shopmind-ai-messages {
 
@@ -1239,9 +1334,7 @@ document
 
 
 
-/* =========================
-   WELCOME
-========================= */
+/* WELCOME */
 
 .shopmind-ai-welcome {
 
@@ -1268,7 +1361,6 @@ document
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     font-size: 26px;
@@ -1305,9 +1397,7 @@ document
 
 
 
-/* =========================
-   SUGGESTIONS
-========================= */
+/* SUGGESTIONS */
 
 #shopmind-ai-suggestions {
 
@@ -1361,19 +1451,8 @@ document
 }
 
 
-.shopmind-suggestion:hover {
 
-    background: #f9fafb;
-
-    border-color: #9ca3af;
-
-}
-
-
-
-/* =========================
-   CHAT MESSAGES
-========================= */
+/* CHAT MESSAGES */
 
 .shopmind-ai-message {
 
@@ -1424,9 +1503,7 @@ document
 
 
 
-/* =========================
-   TYPING ANIMATION
-========================= */
+/* TYPING ANIMATION */
 
 .typing-message {
 
@@ -1494,9 +1571,7 @@ document
 
 
 
-/* =========================
-   INPUT AREA
-========================= */
+/* INPUT AREA */
 
 .shopmind-ai-input-area {
 
@@ -1568,13 +1643,6 @@ document
 }
 
 
-#shopmind-ai-send:hover {
-
-    opacity: 0.9;
-
-}
-
-
 #shopmind-ai-send:disabled {
 
     opacity: 0.55;
@@ -1585,11 +1653,10 @@ document
 
 
 
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
+/* MOBILE */
 
 @media (max-width: 600px) {
+
 
     #shopmind-ai-chat {
 
@@ -1619,10 +1686,12 @@ document
 
     }
 
+
 }
 
-
 </style>
+
+{% endif %}
 
 
 </body>
