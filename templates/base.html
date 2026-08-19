@@ -1,44 +1,61 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>ShopMind AI</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Your CSS -->
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
 </head>
+
 
 <body>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg sticky-top">
+
+<!-- =========================
+     NAVIGATION BAR
+========================= -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
 
     <div class="container">
 
-<a class="navbar-brand d-flex align-items-center"
-   href="/">
+        <a class="navbar-brand d-flex align-items-center"
+           href="/">
 
-    <span style="font-size:28px;">🤖</span>
+            <span style="font-size: 28px;">
+                🤖
+            </span>
 
-    <span class="ms-2">
+            <span class="ms-2">
+                ShopMind AI
+            </span>
 
-        ShopMind AI
+        </a>
 
-    </span>
-
-</a>
 
         <button class="navbar-toggler"
                 type="button"
@@ -49,10 +66,13 @@
 
         </button>
 
+
         <div class="collapse navbar-collapse"
              id="navbarNav">
 
-            <!-- Left Side -->
+
+            <!-- Left Navigation -->
+
             <ul class="navbar-nav me-auto">
 
                 <li class="nav-item">
@@ -68,7 +88,9 @@
 
             </ul>
 
+
             <!-- Search -->
+
             <form class="d-flex me-3"
                   method="GET"
                   action="/">
@@ -88,32 +110,42 @@
 
             </form>
 
+
             <!-- Right Side -->
+
             <div class="d-flex align-items-center">
 
-            <a href="{% url 'cart' %}"
-            class="btn btn-dark position-relative me-3">
 
-                🛒 Cart
+                <!-- Cart -->
 
-                {% if cart_count %}
+                <a href="{% url 'cart' %}"
+                   class="btn btn-dark position-relative me-3">
 
-                <span
-                    class="position-absolute
-                        top-0
-                        start-100
-                        translate-middle
-                        badge rounded-pill bg-danger">
+                    🛒 Cart
 
-                    {{ cart_count }}
+                    {% if cart_count %}
 
-                </span>
+                    <span class="position-absolute
+                                 top-0
+                                 start-100
+                                 translate-middle
+                                 badge
+                                 rounded-pill
+                                 bg-danger">
 
-                {% endif %}
+                        {{ cart_count }}
 
-            </a>
+                    </span>
+
+                    {% endif %}
+
+                </a>
+
 
                 {% if request.user.is_authenticated %}
+
+
+                <!-- Logged In User -->
 
                 <div class="dropdown">
 
@@ -124,19 +156,21 @@
 
                     </button>
 
+
                     <ul class="dropdown-menu dropdown-menu-end">
 
 
                         <li>
 
                             <a class="dropdown-item"
-                            href="{% url 'wishlist' %}">
+                               href="{% url 'wishlist' %}">
 
                                 ❤️ Wishlist
 
                             </a>
 
                         </li>
+
 
                         <li>
 
@@ -149,11 +183,13 @@
 
                         </li>
 
+
                         <li>
 
                             <hr class="dropdown-divider">
 
                         </li>
+
 
                         <li>
 
@@ -170,7 +206,11 @@
 
                 </div>
 
+
                 {% else %}
+
+
+                <!-- Login -->
 
                 <a href="{% url 'login' %}"
                    class="btn btn-dark">
@@ -178,6 +218,7 @@
                     Login
 
                 </a>
+
 
                 {% endif %}
 
@@ -188,36 +229,53 @@
     </div>
 
 </nav>
-    <!-- Main Content -->
-    <div class="container mt-4">
-        {% if messages %}
 
-    {% for message in messages %}
 
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
-             role="alert">
 
-            {{ message }}
+<!-- =========================
+     MAIN CONTENT
+========================= -->
 
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
+<div class="container mt-4">
 
-        </div>
 
-    {% endfor %}
+    {% if messages %}
 
-{% endif %}
+        {% for message in messages %}
+
+            <div class="alert alert-{{ message.tags }}
+                        alert-dismissible
+                        fade
+                        show"
+                 role="alert">
+
+                {{ message }}
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+
+                </button>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
 
 
     {% block content %}
 
     {% endblock %}
 
+
 </div>
 
-<!-- Footer Starts Here -->
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer class="footer mt-5">
 
@@ -225,32 +283,60 @@
 
         <div class="row">
 
+
+            <!-- About -->
+
             <div class="col-lg-5">
 
                 <h4 class="fw-bold">
+
                     🤖 ShopMind AI
+
                 </h4>
 
-<p class="text-muted mt-3">
 
-    ShopMind AI is a modern AI-powered e-commerce
-    platform built with Django. Discover premium
-    products with intelligent search, secure checkout,
-    and a seamless shopping experience.
+                <p class="text-muted mt-3">
 
-</p>
+                    ShopMind AI is a modern AI-powered e-commerce
+                    platform built with Django. Discover premium
+                    products with intelligent search, secure checkout,
+                    and a seamless shopping experience.
+
+                </p>
 
             </div>
 
+
+            <!-- Quick Links -->
+
             <div class="col-lg-3">
 
-                <h5>Quick Links</h5>
+                <h5>
+
+                    Quick Links
+
+                </h5>
+
 
                 <ul class="list-unstyled mt-3">
 
-                    <li><a href="/">Home</a></li>
+                    <li>
 
-                    <li><a href="{% url 'cart' %}">Cart</a></li>
+                        <a href="/">
+                            Home
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="{% url 'cart' %}">
+                            Cart
+                        </a>
+
+                    </li>
+
 
                     {% if request.user.is_authenticated %}
 
@@ -270,9 +356,17 @@
 
             </div>
 
+
+            <!-- Technologies -->
+
             <div class="col-lg-4">
 
-                <h5>Technologies</h5>
+                <h5>
+
+                    Technologies
+
+                </h5>
+
 
                 <ul class="list-unstyled mt-3">
 
@@ -290,7 +384,9 @@
 
         </div>
 
+
         <hr>
+
 
         <div class="text-center text-muted">
 
@@ -302,286 +398,1233 @@
 
 </footer>
 
-<!-- Bootstrap JS -->
+
+
+<!-- =========================
+     SHOPMIND AI ASSISTANT
+========================= -->
+
+
+<!-- Floating Button -->
+
+<button id="shopmind-ai-button"
+        type="button"
+        onclick="toggleShopMindAI()"
+        aria-label="Open ShopMind AI">
+
+    <span class="ai-button-icon">
+        🤖
+    </span>
+
+    <span class="ai-online-dot"></span>
+
+</button>
+
+
+
+<!-- Chat Window -->
+
+<div id="shopmind-ai-chat">
+
+
+    <!-- Header -->
+
+    <div class="shopmind-ai-header">
+
+
+        <div class="shopmind-ai-profile">
+
+
+            <!-- AI Icon -->
+
+            <div class="shopmind-ai-avatar">
+
+                🤖
+
+            </div>
+
+
+            <!-- AI Title -->
+
+            <div class="shopmind-ai-title">
+
+                <strong>
+
+                    ShopMind AI
+
+                </strong>
+
+
+                <span>
+
+                    <i></i>
+
+                    Online · Shopping Assistant
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Close Button -->
+
+        <button class="shopmind-ai-close"
+                type="button"
+                onclick="toggleShopMindAI()"
+                aria-label="Close chat">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+
+    <!-- Messages -->
+
+    <div id="shopmind-ai-messages">
+
+
+        <!-- Welcome -->
+
+        <div class="shopmind-ai-welcome">
+
+            <div class="welcome-icon">
+
+                👋
+
+            </div>
+
+
+            <h5>
+
+                Hello! I'm ShopMind AI
+
+            </h5>
+
+
+            <p>
+
+                Tell me what you're looking for and
+                I'll help you discover the right product.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- Quick Suggestions -->
+
+        <div id="shopmind-ai-suggestions">
+
+
+            <p class="suggestion-label">
+
+                Try asking
+
+            </p>
+
+
+            <button type="button"
+                    class="shopmind-suggestion"
+                    onclick="useShopMindSuggestion('Recommend a product for me')">
+
+                🔍 Recommend a product
+
+            </button>
+
+
+            <button type="button"
+                    class="shopmind-suggestion"
+                    onclick="useShopMindSuggestion('What are the best products available?')">
+
+                ⭐ Best products
+
+            </button>
+
+
+            <button type="button"
+                    class="shopmind-suggestion"
+                    onclick="useShopMindSuggestion('Help me compare products')">
+
+                ⚖️ Compare products
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- Input Area -->
+
+    <div class="shopmind-ai-input-area">
+
+
+        <input type="text"
+               id="shopmind-ai-input"
+               placeholder="Ask about products..."
+               autocomplete="off">
+
+
+        <button id="shopmind-ai-send"
+                type="button"
+                onclick="sendShopMindMessage()"
+                aria-label="Send message">
+
+            ➤
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     BOOTSTRAP JAVASCRIPT
+========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
-<!-- ShopMind AI Assistant -->
-<div id="shopmind-ai-button" onclick="toggleShopMindAI()">
-    🤖
-</div>
 
-<div id="shopmind-ai-chat">
-    <div class="shopmind-ai-header">
-        <div>
-            <strong>ShopMind AI</strong>
-            <small>Your Shopping Assistant</small>
-        </div>
-        <button onclick="toggleShopMindAI()">×</button>
-    </div>
 
-    <div id="shopmind-ai-messages">
-        <div class="shopmind-ai-message ai-message">
-            👋 Hi! I'm ShopMind AI. How can I help you find the right product?
-        </div>
-    </div>
-
-    <div class="shopmind-ai-input-area">
-        <input
-            type="text"
-            id="shopmind-ai-input"
-            placeholder="Ask me about products..."
-            autocomplete="off"
-        >
-        <button onclick="sendShopMindMessage()">Send</button>
-    </div>
-</div>
-
-<style>
-    #shopmind-ai-button {
-        position: fixed;
-        right: 25px;
-        bottom: 25px;
-        width: 58px;
-        height: 58px;
-        border-radius: 50%;
-        background: #111827;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 26px;
-        cursor: pointer;
-        z-index: 9999;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    #shopmind-ai-chat {
-        position: fixed;
-        right: 25px;
-        bottom: 95px;
-        width: 360px;
-        height: 500px;
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-        z-index: 9999;
-        border: 1px solid #e5e7eb;
-    }
-
-    .shopmind-ai-header {
-        background: #111827;
-        color: white;
-        padding: 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .shopmind-ai-header strong {
-        display: block;
-        font-size: 17px;
-    }
-
-    .shopmind-ai-header small {
-        opacity: 0.75;
-    }
-
-    .shopmind-ai-header button {
-        background: transparent;
-        border: none;
-        color: white;
-        font-size: 25px;
-        cursor: pointer;
-    }
-
-    #shopmind-ai-messages {
-        flex: 1;
-        padding: 15px;
-        overflow-y: auto;
-        background: #f9fafb;
-    }
-
-    .shopmind-ai-message {
-        max-width: 85%;
-        padding: 10px 12px;
-        margin-bottom: 10px;
-        border-radius: 12px;
-        font-size: 14px;
-        line-height: 1.5;
-        white-space: pre-wrap;
-    }
-
-    .ai-message {
-        background: #e5e7eb;
-        color: #111827;
-        margin-right: auto;
-    }
-
-    .user-message {
-        background: #111827;
-        color: white;
-        margin-left: auto;
-    }
-
-    .shopmind-ai-input-area {
-        display: flex;
-        padding: 10px;
-        border-top: 1px solid #e5e7eb;
-        background: white;
-        gap: 8px;
-    }
-
-    #shopmind-ai-input {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        outline: none;
-    }
-
-    .shopmind-ai-input-area button {
-        border: none;
-        background: #111827;
-        color: white;
-        padding: 10px 14px;
-        border-radius: 8px;
-        cursor: pointer;
-    }
-
-    .shopmind-ai-input-area button:hover {
-        opacity: 0.9;
-    }
-
-    @media (max-width: 500px) {
-        #shopmind-ai-chat {
-            right: 10px;
-            bottom: 85px;
-            width: calc(100% - 20px);
-            height: 70vh;
-        }
-
-        #shopmind-ai-button {
-            right: 15px;
-            bottom: 15px;
-        }
-    }
-</style>
+<!-- =========================
+     SHOPMIND AI JAVASCRIPT
+========================= -->
 
 <script>
-    function toggleShopMindAI() {
-        const chat = document.getElementById("shopmind-ai-chat");
 
-        if (chat.style.display === "flex") {
-            chat.style.display = "none";
-        } else {
-            chat.style.display = "flex";
-            document.getElementById("shopmind-ai-input").focus();
-        }
+
+function toggleShopMindAI() {
+
+    const chat =
+        document.getElementById("shopmind-ai-chat");
+
+
+    if (chat.style.display === "flex") {
+
+        chat.style.display = "none";
+
     }
 
-    async function sendShopMindMessage() {
-        const input = document.getElementById("shopmind-ai-input");
-        const messages = document.getElementById("shopmind-ai-messages");
+    else {
 
-        const message = input.value.trim();
+        chat.style.display = "flex";
 
-        if (!message) {
-            return;
-        }
 
-        // Display user's message
-        const userMessage = document.createElement("div");
-        userMessage.className = "shopmind-ai-message user-message";
-        userMessage.textContent = message;
-        messages.appendChild(userMessage);
+        setTimeout(function () {
 
-        input.value = "";
+            document
+                .getElementById("shopmind-ai-input")
+                .focus();
 
-        // Scroll to bottom
-        messages.scrollTop = messages.scrollHeight;
+        }, 200);
 
-        // Temporary loading message
-        const loadingMessage = document.createElement("div");
-        loadingMessage.className = "shopmind-ai-message ai-message";
-        loadingMessage.textContent = "Thinking...";
-        messages.appendChild(loadingMessage);
+    }
 
-        messages.scrollTop = messages.scrollHeight;
+}
 
-        try {
-            const response = await fetch("/ai/chat/", {
+
+
+/* =========================
+   QUICK SUGGESTION
+========================= */
+
+function useShopMindSuggestion(message) {
+
+    const input =
+        document.getElementById("shopmind-ai-input");
+
+
+    input.value = message;
+
+
+    sendShopMindMessage();
+
+}
+
+
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+async function sendShopMindMessage() {
+
+    const input =
+        document.getElementById("shopmind-ai-input");
+
+
+    const messages =
+        document.getElementById("shopmind-ai-messages");
+
+
+    const suggestions =
+        document.getElementById("shopmind-ai-suggestions");
+
+
+    const sendButton =
+        document.getElementById("shopmind-ai-send");
+
+
+    const message =
+        input.value.trim();
+
+
+    if (!message) {
+
+        return;
+
+    }
+
+
+
+    /* Hide suggestions */
+
+    if (suggestions) {
+
+        suggestions.style.display = "none";
+
+    }
+
+
+
+    /* User Message */
+
+    const userMessage =
+        document.createElement("div");
+
+
+    userMessage.className =
+        "shopmind-ai-message user-message";
+
+
+    userMessage.textContent =
+        message;
+
+
+    messages.appendChild(userMessage);
+
+
+    input.value = "";
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+
+
+    /* Disable Send Button */
+
+    sendButton.disabled = true;
+
+
+
+    /* Typing Animation */
+
+    const loadingMessage =
+        document.createElement("div");
+
+
+    loadingMessage.className =
+        "shopmind-ai-message ai-message typing-message";
+
+
+    loadingMessage.innerHTML = `
+
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+
+    `;
+
+
+    messages.appendChild(loadingMessage);
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+
+
+    try {
+
+
+        const response =
+            await fetch("/ai/chat/", {
+
                 method: "POST",
+
                 headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken")
+
+                    "Content-Type":
+                        "application/json",
+
+                    "X-CSRFToken":
+                        getCookie("csrftoken")
+
                 },
+
                 body: JSON.stringify({
+
                     message: message
+
                 })
+
             });
 
-            const data = await response.json();
 
-            loadingMessage.remove();
 
-            const aiMessage = document.createElement("div");
-            aiMessage.className = "shopmind-ai-message ai-message";
+        const data =
+            await response.json();
 
-            if (response.ok) {
-                aiMessage.textContent = data.reply;
-            } else {
-                aiMessage.textContent =
-                    data.error || "Sorry, something went wrong.";
-            }
 
-            messages.appendChild(aiMessage);
-            messages.scrollTop = messages.scrollHeight;
 
-        } catch (error) {
-            loadingMessage.remove();
+        loadingMessage.remove();
 
-            const errorMessage = document.createElement("div");
-            errorMessage.className = "shopmind-ai-message ai-message";
-            errorMessage.textContent =
-                "Sorry, I couldn't connect to ShopMind AI.";
 
-            messages.appendChild(errorMessage);
+
+        const aiMessage =
+            document.createElement("div");
+
+
+        aiMessage.className =
+            "shopmind-ai-message ai-message";
+
+
+
+        if (response.ok) {
+
+            aiMessage.textContent =
+                data.reply;
+
         }
+
+        else {
+
+            aiMessage.textContent =
+                data.error ||
+                "Sorry, something went wrong.";
+
+        }
+
+
+
+        messages.appendChild(aiMessage);
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
     }
 
-    function getCookie(name) {
-        let cookieValue = null;
 
-        if (document.cookie && document.cookie !== "") {
-            const cookies = document.cookie.split(";");
+    catch (error) {
 
-            for (let cookie of cookies) {
-                cookie = cookie.trim();
 
-                if (cookie.startsWith(name + "=")) {
-                    cookieValue = decodeURIComponent(
-                        cookie.substring(name.length + 1)
+        loadingMessage.remove();
+
+
+        const errorMessage =
+            document.createElement("div");
+
+
+        errorMessage.className =
+            "shopmind-ai-message ai-message";
+
+
+        errorMessage.textContent =
+            "Sorry, I couldn't connect to ShopMind AI.";
+
+
+        messages.appendChild(errorMessage);
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
+    }
+
+
+    finally {
+
+
+        sendButton.disabled = false;
+
+
+        input.focus();
+
+    }
+
+}
+
+
+
+/* =========================
+   GET CSRF TOKEN
+========================= */
+
+function getCookie(name) {
+
+    let cookieValue =
+        null;
+
+
+    if (
+        document.cookie &&
+        document.cookie !== ""
+    ) {
+
+
+        const cookies =
+            document.cookie.split(";");
+
+
+        for (let cookie of cookies) {
+
+
+            cookie =
+                cookie.trim();
+
+
+            if (
+                cookie.startsWith(
+                    name + "="
+                )
+            ) {
+
+
+                cookieValue =
+                    decodeURIComponent(
+
+                        cookie.substring(
+                            name.length + 1
+                        )
+
                     );
-                    break;
-                }
+
+
+                break;
+
             }
+
         }
 
-        return cookieValue;
     }
 
-    document.getElementById("shopmind-ai-input").addEventListener(
+
+    return cookieValue;
+
+}
+
+
+
+/* =========================
+   ENTER KEY
+========================= */
+
+document
+    .getElementById("shopmind-ai-input")
+    .addEventListener(
+
         "keydown",
-        function(event) {
+
+        function (event) {
+
+
             if (event.key === "Enter") {
+
+
+                event.preventDefault();
+
+
                 sendShopMindMessage();
+
             }
+
+
         }
+
     );
+
+
 </script>
+
+
+
+<!-- =========================
+     SHOPMIND AI CSS
+========================= -->
+
+<style>
+
+
+/* =========================
+   FLOATING AI BUTTON
+========================= */
+
+#shopmind-ai-button {
+
+    position: fixed;
+
+    right: 28px;
+    bottom: 28px;
+
+    width: 64px;
+    height: 64px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #111827;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 9999;
+
+    box-shadow:
+        0 10px 30px
+        rgba(17, 24, 39, 0.28);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+#shopmind-ai-button:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 14px 35px
+        rgba(17, 24, 39, 0.35);
+
+}
+
+
+.ai-button-icon {
+
+    font-size: 31px;
+
+    line-height: 1;
+
+}
+
+
+.ai-online-dot {
+
+    position: absolute;
+
+    right: 5px;
+    bottom: 6px;
+
+    width: 13px;
+    height: 13px;
+
+    background: #22c55e;
+
+    border: 3px solid white;
+
+    border-radius: 50%;
+
+}
+
+
+
+/* =========================
+   CHAT WINDOW
+========================= */
+
+#shopmind-ai-chat {
+
+    position: fixed;
+
+    right: 28px;
+    bottom: 105px;
+
+    width: 420px;
+    height: 620px;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(17, 24, 39, 0.20);
+
+    display: none;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    z-index: 9999;
+
+    border:
+        1px solid #e5e7eb;
+
+}
+
+
+
+/* =========================
+   HEADER
+========================= */
+
+.shopmind-ai-header {
+
+    background: #111827;
+
+    color: white;
+
+    padding: 18px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.shopmind-ai-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.shopmind-ai-avatar {
+
+    width: 46px;
+    height: 46px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255, 255, 255, 0.10);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 26px;
+
+}
+
+
+.shopmind-ai-title strong {
+
+    display: block;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+}
+
+
+.shopmind-ai-title span {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    color: #cbd5e1;
+
+}
+
+
+.shopmind-ai-title i {
+
+    width: 7px;
+    height: 7px;
+
+    background: #22c55e;
+
+    border-radius: 50%;
+
+}
+
+
+.shopmind-ai-close {
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+}
+
+
+.shopmind-ai-close:hover {
+
+    background:
+        rgba(255, 255, 255, 0.10);
+
+}
+
+
+
+/* =========================
+   MESSAGE AREA
+========================= */
+
+#shopmind-ai-messages {
+
+    flex: 1;
+
+    padding: 22px 18px;
+
+    overflow-y: auto;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fafc 0%,
+            #ffffff 100%
+        );
+
+}
+
+
+
+/* =========================
+   WELCOME
+========================= */
+
+.shopmind-ai-welcome {
+
+    text-align: center;
+
+    padding:
+        10px 10px 18px;
+
+}
+
+
+.welcome-icon {
+
+    width: 52px;
+    height: 52px;
+
+    margin:
+        0 auto 12px;
+
+    border-radius: 16px;
+
+    background: #eef2ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 26px;
+
+}
+
+
+.shopmind-ai-welcome h5 {
+
+    margin-bottom: 7px;
+
+    color: #111827;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+.shopmind-ai-welcome p {
+
+    max-width: 300px;
+
+    margin: auto;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* =========================
+   SUGGESTIONS
+========================= */
+
+#shopmind-ai-suggestions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.suggestion-label {
+
+    width: 100%;
+
+    margin-bottom: 2px;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.08em;
+
+}
+
+
+.shopmind-suggestion {
+
+    border:
+        1px solid #e5e7eb;
+
+    background: white;
+
+    color: #374151;
+
+    padding: 9px 12px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+}
+
+
+.shopmind-suggestion:hover {
+
+    background: #f9fafb;
+
+    border-color: #9ca3af;
+
+}
+
+
+
+/* =========================
+   CHAT MESSAGES
+========================= */
+
+.shopmind-ai-message {
+
+    max-width: 82%;
+
+    padding: 11px 14px;
+
+    margin-bottom: 12px;
+
+    border-radius: 16px;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+
+}
+
+
+.ai-message {
+
+    background: white;
+
+    color: #1f2937;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-bottom-left-radius: 5px;
+
+    margin-right: auto;
+
+}
+
+
+.user-message {
+
+    background: #111827;
+
+    color: white;
+
+    border-bottom-right-radius: 5px;
+
+    margin-left: auto;
+
+}
+
+
+
+/* =========================
+   TYPING ANIMATION
+========================= */
+
+.typing-message {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    width: fit-content;
+
+}
+
+
+.typing-dot {
+
+    width: 6px;
+    height: 6px;
+
+    background: #9ca3af;
+
+    border-radius: 50%;
+
+    animation:
+        typingBounce
+        1.2s infinite;
+
+}
+
+
+.typing-dot:nth-child(2) {
+
+    animation-delay: 0.15s;
+
+}
+
+
+.typing-dot:nth-child(3) {
+
+    animation-delay: 0.30s;
+
+}
+
+
+@keyframes typingBounce {
+
+    0%,
+    60%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+
+    30% {
+
+        transform:
+            translateY(-5px);
+
+    }
+
+}
+
+
+
+/* =========================
+   INPUT AREA
+========================= */
+
+.shopmind-ai-input-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px;
+
+    background: white;
+
+    border-top:
+        1px solid #eef0f3;
+
+}
+
+
+#shopmind-ai-input {
+
+    flex: 1;
+
+    height: 48px;
+
+    padding:
+        0 15px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 13px;
+
+    outline: none;
+
+    font-size: 14px;
+
+}
+
+
+#shopmind-ai-input:focus {
+
+    border-color: #6b7280;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(107, 114, 128, 0.10);
+
+}
+
+
+#shopmind-ai-send {
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+}
+
+
+#shopmind-ai-send:hover {
+
+    opacity: 0.9;
+
+}
+
+
+#shopmind-ai-send:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+}
+
+
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+    #shopmind-ai-chat {
+
+        right: 10px;
+
+        bottom: 88px;
+
+        width:
+            calc(100% - 20px);
+
+        height:
+            min(650px, 75vh);
+
+        border-radius: 20px;
+
+    }
+
+
+    #shopmind-ai-button {
+
+        right: 18px;
+
+        bottom: 18px;
+
+        width: 60px;
+        height: 60px;
+
+    }
+
+}
+
+
+</style>
+
+
+</body>
+
 </html>
